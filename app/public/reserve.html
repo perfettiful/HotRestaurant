@@ -26,11 +26,31 @@
 
     </div>
 
-    <form method="POST">
+<form role='form'>
+    <div class="form-group">
+        <label for="customerName">Customer Name</label>
+        <input type="text" class="form-control" id="customerName">
+    </div>
 
+    <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" class="form-control" id="phoneNumber">
+    </div>
+    <div class="form-group">
+        <label for="customerEmail">Customer Email</label>
+        <input type="text" class="form-control" id="customerEmail">
+    </div>
+    <div class="form-group">
+        <label for="customerId">Customer Id</label>
+        <input type="text" class="form-control" id="customerId">
+    </div>
+    
+</form>
 
-    </form>
-
+<div class="text-right">
+        <button type="submit" class="btn btn-primary btn-md" id="reserve-btn"><span class="fa fa-fire"></span>Reserve that table!</button>
+      </div>
+    </div>
 
     <footer class="footer">
         <div class="container">
@@ -41,10 +61,31 @@
 
 
   </div>
-
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+    // On-click event
+    $("#reserve-btn").on("click", function(event) {
+      event.preventDefault();
+
+      var newReservation = {
+        customerName: $("#customerName").val().trim(),
+        phoneNumber: $("#phoneNumber").val().trim(),
+        customerEmail: $("#customerEmail").val().trim(),
+        customerId: $("#customerId").val().trim()
+      };
+
+      // Question: What does this code do??
+      $.post("/api/tables", newReservation)
+        .then(function(data) {
+          console.log(data);
+          alert("Adding reservation...");
+        });
+
+    });
+  </script>
 
 </body>
 </html>
